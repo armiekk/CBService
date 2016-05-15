@@ -1,0 +1,41 @@
+<?xml version ='1.0' encoding ='UTF-8' ?>
+<definitions
+  xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/'
+  xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+  xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/'
+  xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
+  xmlns='http://schemas.xmlsoap.org/wsdl/'>
+
+<message name='checkprodRequest'>
+  <part name='prodName' type='xsd:string'/>
+</message>
+<message name='checkprodResponse'>
+  <part name='Result' type='xsd:string'/>
+</message>
+<portType name='checkprodPortType'>
+  <operation name='checkprod'>
+    <input message='tns:checkprodRequest'/>
+    <output message='tns:checkprodResponse'/>
+  </operation>
+</portType>
+<binding name='checkprodBinding' type='tns:checkprodPortType'>
+  <soap:binding style='rpc'
+    transport='http://schemas.xmlsoap.org/soap/http'/>
+  <operation name='checkprod'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#checkprod'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+</binding>
+<service name='checkprodService'>
+  <port name='checkprodPort' binding='checkprodBinding'>
+    <soap:address location='http://127.0.0.1:88/CBService/services/soap_services.php'/>
+  </port>
+</service>
+</definitions>
